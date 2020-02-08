@@ -12,7 +12,8 @@ def create_user(username, password):
     if get_user_by_name(username) is None:
         user = users.insert_one({
             "username": username,
-            "password": hash_password(username, password)})
+            "password": hash_password(username, password),
+            "postId": []})
         return user.inserted_id
     return None
 
@@ -36,3 +37,24 @@ def authenticate(username, password):
     if hash_password(username, password) != user[password]:
         return
     return user["_id"]
+
+
+def create_post():
+    return None
+
+
+def get_post_by_id(userid):
+
+    return None
+
+
+def delete_post():
+    return None
+
+
+def all_post_by_user(userid):
+    return None
+
+
+def all_post():
+    return None
