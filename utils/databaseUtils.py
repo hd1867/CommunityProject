@@ -2,6 +2,7 @@ from _sha256 import sha256
 from bson import ObjectId
 
 import pymongo as pymongo
+import base64
 
 client = pymongo.MongoClient("mongodb+srv://admin:pass@thecommunityproject-lawyq.gcp.mongodb.net/test?retryWrites=true&w=majority")
 db = client.Users
@@ -30,10 +31,12 @@ def get_user_by_id(userid):
     return users.find_one({"_id": ObjectId(userid)})
 
 
+# constructs the value for a password key
 def hash_password(username, password):
     return sha256(str(username+password).encode('utf-8')).hexdigest()
 
 
+# provides the information needed for a user to sign in
 def authenticate(username, password):
     user = get_user_by_name(username)
     if user is None:
@@ -43,27 +46,51 @@ def authenticate(username, password):
     return user["_id"]
 
 
+# creates a post with a title, description, username, skills, and image name
 def create_post(title, desc, username, skills):
     user = get_user_by_name(username)
     post = posts.insert_one({
         "title": title,
         "desc": desc,
         "user": user,
+        # "image": image_to_str(image_name),
         "skills": skills})
     return post.inserted_id
 
 
+# gets a post by the post id
 def get_post_by_id(post_id):
     return posts.find_one({"_id": ObjectId(post_id)})
 
 
+# deletes a post by the post id
 def delete_post(post_id):
     posts.delete_one(posts.find_one({"_id": ObjectId(post_id)}))
     return
 
 
+# returns all of he post between every user
 def all_post():
     all_pst = []
     for items in posts:
         all_pst.append(items["_id"])
     return all_pst
+
+
+# converts an image into type string
+def image_to_str(image_name):
+    with open(image_name, "rb") as imageFile:
+        image_str = base64.b64encode(imageFile.read())
+    return image_str
+
+
+# converts a string into type image
+def str_to_image(image_str):
+    with open(image_str, "wb") as fimage:
+        image = fimage.write(str.decode('base64'))
+    return image
+
+
+# upgrades a normal user to an admin
+def user_admin(userid):
+    return None
