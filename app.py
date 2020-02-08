@@ -1,10 +1,23 @@
 import os
 from datetime import timedelta
+from functools import wraps
 
 from flask import Flask, render_template, request, redirect, flash, url_for, session
 from flask_bootstrap import Bootstrap
 
 from utils import databaseUtils
+
+
+def require_login(f):
+    @wraps(f)
+    def inner(*args, **kwargs):
+        if 'user' not in session:
+            flash("Please log in to view posts")
+            return redirect(url_for("login"))
+        else:
+            return f(*args, **kwargs)
+    return inner
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(16)
@@ -16,8 +29,30 @@ def root():
     return render_template("home.html")
 
 
-@app.route('/login')
+@app.route("/posts")
 def posts():
+    return render_template("posts.html")
+
+
+@app.route("/report")
+@require_login
+def report():
+    return render_template("report.html")
+
+
+@app.route("/createpost")
+@require_login
+def createpost():
+    return
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route('/login')
+def login():
     return render_template("login.html")
 
 
