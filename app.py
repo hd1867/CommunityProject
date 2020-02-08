@@ -56,6 +56,13 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/logout')
+def logout():
+    if 'user' in session:
+        session.pop('user')
+    return redirect(url_for('login'))
+
+
 @app.route("/auth", methods=["POST"])
 def auth():
     if "submit" not in request.form or "user" not in request.form or "pwd" not in request.form:
