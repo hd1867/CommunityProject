@@ -77,12 +77,14 @@ def all_post():
     return all_pst
 
 
+# converts an image into type string
 def image_to_str(image_name):
     with open(image_name, "rb") as imageFile:
         image_str = base64.b64encode(imageFile.read())
     return image_str
 
 
+# converts a string into type image
 def str_to_image(image_str):
     with open(image_str, "wb") as fimage:
         image = fimage.write(str.decode('base64'))
