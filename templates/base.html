@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css' ) }}">
         <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js' ) }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js' ) }}"></script>
-        <link rel='icon' href="static/img/potato.png" type='image/x-icon'>
+        <link rel='icon' href="static/img/icons.png" type='image/x-icon'>
         {% block css %}{% endblock %}
 
         <title>{% block title %}{% endblock %}</title>
@@ -20,8 +20,8 @@
                 <li class="nav-item"><a id="home-link" class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a id="single-link" class="nav-link" href="/posts">Posts</a></li>
                 <li class="nav-item"><a id="about-link" class="nav-link" href="/about">About</a></li>
-                <li class="nav-item"><a id="about-link" class="nav-link" href="https://github.com/MRuvinshteyn/legendary-potato" target="_blank">Source Code</a></li>
-<!--                <li class="nav-item"><a id="multi-link" class="nav-link" href="/multi">Multiplayer</a></li>-->
+                <li class="nav-item"><a id="about-link" class="nav-link" href="https://github.com/hd1867/CommunityProject" target="_blank">Source Code</a></li>
+                <li class="nav-item"><a id="multi-link" class="nav-link" href="/report">Report a Problem</a></li>
 
                 {% if 'user' in session %}
                 <li class="nav-item"><a id="login-link" class="nav-link" href="/logout">Logout</a></li>
