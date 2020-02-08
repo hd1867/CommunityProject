@@ -12,10 +12,11 @@ def require_login(f):
     @wraps(f)
     def inner(*args, **kwargs):
         if 'user' not in session:
-            flash("Please log in to view posts")
+            flash("Please log in to create posts")
             return redirect(url_for("login"))
         else:
             return f(*args, **kwargs)
+
     return inner
 
 
@@ -40,10 +41,23 @@ def report():
     return render_template("report.html")
 
 
+@app.route("/post", methods=["POST"])
+@require_login
+def post():
+    if "title" not in request.form or "description" not in request.form:
+        flash("Please fill out title and description")
+        return redirect(url_for("createpost"))
+    else:
+        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form['skills'],
+                                         session['user'])
+        flash("Post Created!")
+        return redirect(url_for('posts'))
+
+
 @app.route("/createpost")
 @require_login
 def createpost():
-    return
+    return render_template("create.html")
 
 
 @app.route("/about")
@@ -89,7 +103,6 @@ def auth():
         else:
             flash('This username already exists!')
             return redirect(url_for('login'))
-
 
 
 if __name__ == '__main__':
