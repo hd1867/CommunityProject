@@ -2,6 +2,7 @@ from _sha256 import sha256
 from bson import ObjectId
 
 import pymongo as pymongo
+import base64
 
 client = pymongo.MongoClient("mongodb+srv://admin:pass@thecommunityproject-lawyq.gcp.mongodb.net/test?retryWrites=true&w=majority")
 db = client.Users
@@ -45,13 +46,14 @@ def authenticate(username, password):
     return user["_id"]
 
 
-# creates a post with a title, description, username, and skills field
-def create_post(title, desc, username, skills):
+# creates a post with a title, description, username, skills, and image name
+def create_post(title, desc, username, skills, image_name):
     user = get_user_by_name(username)
     post = posts.insert_one({
         "title": title,
         "desc": desc,
         "user": user,
+        "image": image_to_str(image_name),
         "skills": skills})
     return post.inserted_id
 
@@ -73,6 +75,18 @@ def all_post():
     for items in posts:
         all_pst.append(items["_id"])
     return all_pst
+
+
+def image_to_str(image_name):
+    with open(image_name, "rb") as imageFile:
+        image_str = base64.b64encode(imageFile.read())
+    return image_str
+
+
+def str_to_image(image_str):
+    with open(image_str, "wb") as fimage:
+        image = fimage.write(str.decode('base64'))
+    return image
 
 
 # upgrades a normal user to an admin
