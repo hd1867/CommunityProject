@@ -30,10 +30,12 @@ def get_user_by_id(userid):
     return users.find_one({"_id": ObjectId(userid)})
 
 
+# constructs the value for a password key
 def hash_password(username, password):
     return sha256(str(username+password).encode('utf-8')).hexdigest()
 
 
+# provides the information needed for a user to sign in
 def authenticate(username, password):
     user = get_user_by_name(username)
     if user is None:
@@ -43,6 +45,7 @@ def authenticate(username, password):
     return user["_id"]
 
 
+# creates a post with a title, description, username, and skills field
 def create_post(title, desc, username, skills):
     user = get_user_by_name(username)
     post = posts.insert_one({
@@ -53,17 +56,25 @@ def create_post(title, desc, username, skills):
     return post.inserted_id
 
 
+# gets a post by the post id
 def get_post_by_id(post_id):
     return posts.find_one({"_id": ObjectId(post_id)})
 
 
+# deletes a post by the post id
 def delete_post(post_id):
     posts.delete_one(posts.find_one({"_id": ObjectId(post_id)}))
     return
 
 
+# returns all of he post between every user
 def all_post():
     all_pst = []
     for items in posts:
         all_pst.append(items["_id"])
     return all_pst
+
+
+# upgrades a normal user to an admin
+def user_admin(userid):
+    return None
