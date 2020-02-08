@@ -9,7 +9,6 @@ users = db.users
 posts = db.posts
 
 
-
 def create_user(username, password):
     if get_user_by_name(username) is None:
         user = users.insert_one({
@@ -41,16 +40,14 @@ def authenticate(username, password):
     return user["_id"]
 
 
-def create_post(title, desc, username, skills, _id):
+def create_post(title, desc, username, skills):
     user = get_user_by_name(username)
-    if get_post_by_id(_id) is None:
-        post = posts.insert_one({
-            "title": title,
-            "desc": desc,
-            "user": user,
-            "skills": skills})
-        return post.inserted_id
-    return None
+    post = posts.insert_one({
+        "title": title,
+        "desc": desc,
+        "user": user,
+        "skills": skills})
+    return post.inserted_id
 
 
 def get_post_by_id(post_id):
@@ -59,3 +56,10 @@ def get_post_by_id(post_id):
 
 def delete_post():
     return
+
+
+def all_post():
+    all_pst = []
+    for items in posts:
+        all_pst.append(items["_id"])
+    return all_pst
