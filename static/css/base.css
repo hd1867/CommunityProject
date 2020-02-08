@@ -1,7 +1,9 @@
 
 hr {
-    background-color: white;
-    body{background: url( "static/home-background.png") repeat 0 0;}
+    background-color: white;}
+
+body
+{background: url( "static/home-background.png") repeat 0 0;
 }
 
 .wrapper {
@@ -30,11 +32,12 @@ hr {
 button {
     font-family: sans-serif;
     border-radius: 5vh;
-    background-color: azure;
+    background-color: rgba(240, 255, 255, .8);
     min-height: 50px;
     min-width: 200px;
     border-color: black;
     border-style: solid;
+
 
 }
 
@@ -52,7 +55,7 @@ button {
     border: solid 1px #d7d7d7;
     border-radius: 20px;
     float: left;
-    background-color: azure;
+    background-color: rgba(240, 255, 255, .8);
     padding: 3em;
     margin: 0 1em;
 }
