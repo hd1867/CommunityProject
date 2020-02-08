@@ -9,7 +9,6 @@ users = db.users
 posts = db.posts
 
 
-
 def create_user(username, password):
     if get_user_by_name(username) is None:
         user = users.insert_one({
