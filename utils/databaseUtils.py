@@ -44,7 +44,6 @@ def create_post():
 
 
 def get_post_by_id(userid):
-
     return None
 
 
