@@ -72,8 +72,10 @@ def delete_post(post_id):
 # returns all of he post between every user
 def all_post():
     all_pst = []
-    for items in posts:
-        all_pst.append(items["_id"])
+    for items in posts.find({}):
+
+        all_pst.append(items)
+        print(all_pst)
     return all_pst
 
 

@@ -32,7 +32,7 @@ def root():
 
 @app.route("/posts")
 def posts():
-    return render_template("posts.html")
+    return render_template("posts.html", posts=databaseUtils.all_post())
 
 
 @app.route("/report")

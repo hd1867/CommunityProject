@@ -7,4 +7,12 @@
 
 <button type="button" name="create" value="Create" onclick="document.location.href='/createpost'">Create Post</button>
 
+
+    <h2>Posts</h2>
+        <ul id="posts">
+        {% for item in posts%}
+            <li>{{ item["title"] }}</li>
+        {% endfor %}
+        </ul>
+
 {% endblock %}
