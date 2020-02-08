@@ -32,5 +32,7 @@ def hash_password(username, password):
 def authenticate(username, password):
     user = get_user_by_name(username)
     if user is None:
-        return None
+        return
+    if hash_password(username, password) != user[password]:
+        return
     return user["_id"]
