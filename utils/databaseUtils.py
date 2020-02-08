@@ -6,6 +6,8 @@ import pymongo as pymongo
 client = pymongo.MongoClient("mongodb+srv://admin:pass@thecommunityproject-lawyq.gcp.mongodb.net/test?retryWrites=true&w=majority")
 db = client.Users
 users = db.users
+posts = db.posts
+
 
 
 def create_user(username, password):
@@ -39,21 +41,21 @@ def authenticate(username, password):
     return user["_id"]
 
 
-def create_post():
+def create_post(title, desc, username, skills, _id):
+    user = get_user_by_name(username)
+    if get_post_by_id(_id) is None:
+        post = posts.insert_one({
+            "title": title,
+            "desc": desc,
+            "user": user,
+            "skills": skills})
+        return post.inserted_id
     return None
 
 
-def get_post_by_id(userid):
-    return None
+def get_post_by_id(post_id):
+    return posts.find_one({"_id": ObjectId(post_id)})
 
 
 def delete_post():
-    return None
-
-
-def all_post_by_user(userid):
-    return None
-
-
-def all_post():
-    return None
+    return
