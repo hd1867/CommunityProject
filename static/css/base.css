@@ -1,0 +1,65 @@
+
+hr {
+    background-color: white;
+}
+
+.wrapper {
+    margin: 5vh;
+    background-color: rgba(36, 212, 42, 0.64);
+    border: 1px solid white;
+    padding: 2vh;
+    min-height: 80vh;
+    border-radius: 5vh;
+}
+
+.nav {
+    background-color: lawngreen;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.container .row button {
+    line-height: 3em;
+}
+
+.btn-light {
+    border: solid 1px #d7d7d7;
+}
+
+.form-holder {
+    display: flex;
+    justify-content: center;
+    width: auto;
+}
+
+.form-holder .form-cell {
+    border: solid 1px #d7d7d7;
+    border-radius: 20px;
+    float: left;
+    background-color: rgba(34, 225, 44, 0.75);
+    padding: 3em;
+    margin: 0 1em;
+    box-shadow: 5px 5px rgba(0, 0, 0, .25);
+}
+
+.form-holder .form-cell input[type=text], .form-holder .form-cell input[type=password] {
+    width: 20em;
+}
+
+@media screen and (max-width: 900px) {
+    .form-holder {
+        display: block;
+    }
+    .form-holder .form-cell {
+        display: block;
+        float: none;
+        width: 80%;
+        margin: auto;
+        font-size: 3vw;
+        text-align: center;
+    }
+}
