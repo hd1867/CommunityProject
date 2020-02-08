@@ -47,13 +47,13 @@ def authenticate(username, password):
 
 
 # creates a post with a title, description, username, skills, and image name
-def create_post(title, desc, username, skills, image_name):
+def create_post(title, desc, username, skills):
     user = get_user_by_name(username)
     post = posts.insert_one({
         "title": title,
         "desc": desc,
         "user": user,
-        "image": image_to_str(image_name),
+        # "image": image_to_str(image_name),
         "skills": skills})
     return post.inserted_id
 
