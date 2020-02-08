@@ -53,3 +53,7 @@ def create_post(title, desc, username, skills, _id):
 
 def get_post_by_id(post_id):
     return posts.find_one({"_id": ObjectId(post_id)})
+
+
+def delete_post():
+    return
