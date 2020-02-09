@@ -46,7 +46,8 @@ img {
     border-style: inset;
     color: black;
     width: 80%;
-    position: center;
+    position: relative;
+    left: 10vh;
 }
 
 label {
