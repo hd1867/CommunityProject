@@ -50,7 +50,7 @@ def posts():
 @app.route("/details")
 def details():
     post = (databaseUtils.get_post_by_id(request.args.get('postid')))
-    postDetails = [(post)['title'], (post)['description'], (post)['location'], (post)['skills']]
+    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['location']]
 
     return render_template("post.html", post=postDetails)
 
@@ -67,6 +67,17 @@ def report_button():
     return render_template('report.html')
 
 
+@app.route("/comment", methods=["POST"])
+@require_login
+def comment():
+    dest = "/details" + "?" + "postid=" + request.args.get("postid")
+    if "Comment" not in request.form:
+        flash("Comments cannot be empty")
+        return redirect(dest)
+    else:
+        print(request.form['Comment'])
+        temp = databaseUtils.comment_post(request.args.get("postid"), request.form['Comment'])
+        return redirect(dest)
 
 @app.route("/post", methods=["POST"])
 @require_login
