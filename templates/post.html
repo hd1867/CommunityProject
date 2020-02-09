@@ -7,19 +7,21 @@
 
     <ul id="post">
         <div class ="card">
-
-        <div class="container">
-            <h1 class="text-center"> {{post[0]}} </h1>
-            <h2 class="text-left"> {{post[1]}}</h2>
-            <h2 class="text-left"> Location: {{post[4]}}</h2>
-            <h2 class="text-left"> Skills Required: {{post[2]}}</h2>
-            <h2 class="text-left"> RSVP: </h2>
-            <div class ="card">
-            {% for rsvps in post[5] %}
-                <h5 class="text-left">{{ rsvps['user'] }} </h5>
-            {% endfor %}
+            <div class="row">
+                <div class="container">
+                    <h1 class="text-center"> {{post[0]}} </h1>
+                    <h2 class="text-left"> {{post[1]}}</h2>
+                    <h2 class="text-left"> Location: {{post[4]}}</h2>
+                    <h2 class="text-left"> Skills Required: {{post[2]}}</h2>
+                    <h2 class="text-left"> RSVP: </h2>
+                    <div class ="card">
+                    {% for rsvps in post[4] %}
+                        <h5 class="text-left">{{ rsvps['user'] }} </h5>
+                    {% endfor %}
+                    </div>
+                </div>
+            <img src="{{post[6]}}" alt="placeholder">
             </div>
-        </div>
 
         <div class="form-holder">
             <form action="{{ modify_query("/comment", postid=post[3]) }}" method="POST">
@@ -44,7 +46,7 @@
            <!-- <button type="button" name="rsvp" value="rsvp" onclick="document.location.href='/rsvp_confirm'"> RSVP </button> -->
         </div>
     </div>
-         {% for comments in post[4] %}
+         {% for comments in post[5] %}
             <div class ="card">
                 <div class ="container">
                 <h5 class="text-left">{{ comments['user'] }} said: </h5>

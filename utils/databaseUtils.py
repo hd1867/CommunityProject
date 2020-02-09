@@ -73,7 +73,7 @@ def authenticate(username, password):
 
 
 # creates a post with all of its needed/wanted properties
-def create_post(title, description, username, loc, skills):
+def create_post(title, description, username, loc, skills, pic):
     user = get_user_by_name(username)
     picture = pic
     post = posts.insert_one({
