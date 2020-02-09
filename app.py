@@ -50,7 +50,7 @@ def posts():
 @app.route("/details")
 def details():
     post = (databaseUtils.get_post_by_id(request.args.get('postid')))
-    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"]]
+    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['location']]
 
     return render_template("post.html", post=postDetails)
 
@@ -79,7 +79,6 @@ def comment():
         temp = databaseUtils.comment_post(request.args.get("postid"), request.form['Comment'])
         return redirect(dest)
 
-
 @app.route("/post", methods=["POST"])
 @require_login
 def post():
@@ -87,7 +86,7 @@ def post():
         flash("Please fill out title and description")
         return redirect(url_for("createpost"))
     else:
-        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form["location"], request.form['skills'],
+        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form['location'], request.form['skills'],
                                          session['user'])
         flash("Post Created!")
         return redirect(url_for('posts'))
