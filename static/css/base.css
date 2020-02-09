@@ -45,6 +45,12 @@ img {
     padding: 5vh;
     border-style: inset;
     color: black;
+    width: 80%;
+    position: center;
+}
+
+label {
+  width: 80%;
 }
 
 button {
@@ -124,6 +130,6 @@ button {
     grid-gap: 100px;
 }
 
-.textarea {
+textarea {
     min-width: 80%;
 }
