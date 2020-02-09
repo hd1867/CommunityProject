@@ -50,17 +50,18 @@ def authenticate(username, password):
     return user["_id"]
 
 
-# creates a post with a title, description, username, skills, and image name
-def create_post(title, description, username, loc, skills, pic):
+# creates a post with all of its needed/wanted properties
+def create_post(title, description, username, loc, skills):
     user = get_user_by_name(username)
-    picture = fs.put(pic)
+    # picture = fs.put(pic)
     post = posts.insert_one({
         "title": title,
         "description": description,
         "user": username,
         "loc": loc,
-        "picture": picture,
         "skills": skills,
+        # "picture": picture,
+        "rsvp": [],
         "comments": []})
     return post.inserted_id
 
@@ -70,6 +71,7 @@ def get_post_by_id(post_id):
     return posts.find_one({"_id": ObjectId(post_id)})
 
 
+# add a comment on someone's on post
 def comment_post(post_id, user, comment):
     post = (get_post_by_id(post_id))
     if post['comments'] is None:
@@ -77,6 +79,17 @@ def comment_post(post_id, user, comment):
     else:
         post['comments'] += [{"user" : user, "comment" : comment}]
     new_value = {"$set": {"comments": post['comments']}}
+    posts.update_one(get_post_by_id(post_id), new_value)
+
+
+# add an rsvp on someone's post
+def rsvp_post(post_id, user):
+    post = (get_post_by_id(post_id))
+    if post['rsvp'] is None:
+        post['rsvp'] = [{"user": user}]
+    else:
+        post['rsvp'] += [{"user": user}]
+    new_value = {"$set": {"rsvp": post['rsvp']}}
     posts.update_one(get_post_by_id(post_id), new_value)
 
 

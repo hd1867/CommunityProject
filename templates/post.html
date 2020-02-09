@@ -12,6 +12,12 @@
             <h2 class="text-left"> {{post[1]}}</h2>
             <h2 class="text-left"> Location: {{post[4]}}</h2>
             <h2 class="text-left"> Skills Required: {{post[2]}}</h2>
+            <h2 class="text-left"> RSVP: </h2>
+            <div class ="card">
+            {% for rsvps in post[5] %}
+                <h5 class="text-left">{{ rsvps['user'] }} </h5>
+            {% endfor %}
+            </div>
         </div>
 
         <div class="form-holder">
@@ -20,21 +26,24 @@
                     <label for="Comment"></label>
                     <textarea type="text" name="Comment" id="Comment" rows="4" cols="50"></textarea><br>
 
-        <div class="row">
+        <div class="column">
 
-
-            <!-- find a way to make a specific block for comments when they are put in -->
             <input type="submit" class="btn" name="Comment" value="Comment">
                 </div>
             </div>
             </form>
             <!-- make it so that when RSVP'd your user name will appear in the RSVP'd tab for the card -->
-            <!-- make a RSVP'd label for the post card -->
-            <!-- what does the post card belong to? -->
-            <button onclick=""> RSVP </button>
+            <!-- find a way to connect your username to another persons post -->
+            <!-- find a way to remake the post after the rsvp with the updated RSVP list -->
+            <form action="{{ modify_query("/rsvp_confirm", postid=post[3]) }}" method="POST">
+                <div class="column">
+                    <input type="submit" class="btn" name="rsvp" value="rsvp">
+                </div>
+            </form>
+           <!-- <button type="button" name="rsvp" value="rsvp" onclick="document.location.href='/rsvp_confirm'"> RSVP </button> -->
         </div>
     </div>
-         {% for comments in post[5] %}
+         {% for comments in post[4] %}
             <div class ="card">
                 <div class ="container">
                 <h5 class="text-left">{{ comments['user'] }} said: </h5>

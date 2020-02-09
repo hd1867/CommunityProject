@@ -9,8 +9,6 @@ from werkzeug.urls import url_encode
 from utils import databaseUtils
 
 
-
-
 def require_login(f):
     @wraps(f)
     def inner(*args, **kwargs):
@@ -26,6 +24,7 @@ def require_login(f):
 app = Flask(__name__)
 app.secret_key = os.urandom(16)
 Bootstrap(app)
+
 
 @app.template_global()
 def modify_query(origin, **new_values):
@@ -68,6 +67,15 @@ def report_button():
     return redirect('/report')
 
 
+@app.route("/rsvp_confirm", methods=["POST"])
+@require_login
+def rsvp_confirm():
+    print("check check check check check check check check check check")
+    temp = databaseUtils.rsvp_post(request.args.get("postid"), session['username'])
+    flash("You have successfully RSVP'd!")
+    return redirect('/posts')
+
+
 @app.route("/comment", methods=["POST"])
 @require_login
 def comment():
@@ -79,6 +87,7 @@ def comment():
         print(request.form['Comment'])
         temp = databaseUtils.comment_post(request.args.get("postid"), session['username'], request.form['Comment'])
         return redirect(dest)
+
 
 @app.route("/post", methods=["POST"])
 @require_login
