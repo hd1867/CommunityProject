@@ -14,7 +14,6 @@
     {% for item in posts%}
         <li>
        <div class="card">
-            <div class="container">
                 <h4 class="text-left">
                     {{item.title}}
                 </h4>
@@ -25,7 +24,12 @@
 
                 <h5 class="text-left">
                     Skills Required: {{item.skills}}
+
                 </h5>
+
+                <button class="right" value="Expand" onclick=document.location.href="{{ modify_query("/details", postid=item._id) }}">
+                        View More
+                    </button>
             </div>
        </div>
         </li>

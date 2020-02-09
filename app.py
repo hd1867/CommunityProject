@@ -4,8 +4,11 @@ from functools import wraps
 
 from flask import Flask, render_template, request, redirect, flash, url_for, session
 from flask_bootstrap import Bootstrap
+from werkzeug.urls import url_encode
 
 from utils import databaseUtils
+
+
 
 
 def require_login(f):
@@ -24,6 +27,14 @@ app = Flask(__name__)
 app.secret_key = os.urandom(16)
 Bootstrap(app)
 
+@app.template_global()
+def modify_query(origin, **new_values):
+    args = request.args.copy()
+
+    for key, value in new_values.items():
+        args[key] = value
+
+    return '{}?{}'.format(origin, url_encode(args))
 
 @app.route('/')
 def root():
@@ -39,6 +50,15 @@ def details():
 @app.route("/posts")
 def posts():
     return render_template("posts.html", posts=databaseUtils.all_post())
+
+
+@app.route("/details")
+def details():
+    post = (databaseUtils.get_post_by_id(request.args.get('postid')))
+    postDetails = [(post)['title'], (post)['description'], (post)['skills']]
+
+    return render_template("post.html", post=postDetails)
+
 
 
 @app.route("/report")
