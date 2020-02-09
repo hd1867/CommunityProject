@@ -60,8 +60,6 @@ button {
 }
 
 .gallery{
-    margin: 5vh;
-    border: 1vh solid #ccc;
     float: left;
     width: 180px;
 }
