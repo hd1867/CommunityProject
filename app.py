@@ -36,15 +36,10 @@ def modify_query(origin, **new_values):
 
     return '{}?{}'.format(origin, url_encode(args))
 
+
 @app.route('/')
 def root():
     return render_template("home.html")
-
-
-@app.route("/details")
-@require_login
-def details():
-    return render_template("post.html", details=databaseUtils.get_post_by_id())
 
 
 @app.route("/posts")
@@ -58,7 +53,6 @@ def details():
     postDetails = [(post)['title'], (post)['description'], (post)['skills']]
 
     return render_template("post.html", post=postDetails)
-
 
 
 @app.route("/report")
