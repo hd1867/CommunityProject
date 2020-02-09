@@ -61,6 +61,7 @@ def create_post(title, description, username, skills, location):
 
 # gets a post by the post id
 def get_post_by_id(post_id):
+    print(posts.find_one({"_id": ObjectId(post_id)}))
     return posts.find_one({"_id": ObjectId(post_id)})
 
 
