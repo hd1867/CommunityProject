@@ -8,19 +8,24 @@
     <ul id="post">
         <div class ="card">
             <div class="row">
-                <div class="container">
-                    <h1 class="text-center"> {{post[0]}} </h1>
-                    <h2 class="text-left"> {{post[1]}}</h2>
-                    <h2 class="text-left"> Location: {{post[4]}}</h2>
-                    <h2 class="text-left"> Skills Required: {{post[2]}}</h2>
-                    <h2 class="text-left"> RSVP: </h2>
+                <div class="column">
+               <!-- <div class="container"> -->
+                    <h2 class="text-justify"> {{post[0]}} </h2><br>
+                    <h3 class="text-justify"> {{post[1]}}</h3><br>
+                    <h4 class="text-justify"> Location: {{post[4]}}</h4>
+                    <h4 class="text-justify"> Skills Required: {{post[2]}}</h4>
+                    <h4 class="text-justify"> RSVP: </h4>
                     <div class ="card">
                     {% for rsvps in post[4] %}
                         <h5 class="text-left">{{ rsvps['user'] }} </h5>
                     {% endfor %}
                     </div>
+                <!-- </div> -->
                 </div>
-            <img src="{{post[6]}}" alt="placeholder">
+                <div class="column">
+                    <h4 class="text-justify"> . </h4>
+                    <img src="{{post[6]}}" alt="placeholder">
+                </div>
             </div>
 
         <div class="form-holder">
