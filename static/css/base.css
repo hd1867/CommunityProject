@@ -49,7 +49,7 @@ button {
 }
 
 .gallery{
-    margin 5vh;
+    margin: 5vh;
     border: 1vh solid #ccc;
     float: left;
     width: 180px;
@@ -78,7 +78,7 @@ button {
     background-color: rgba(240, 255, 255, .8);
     padding: 3em;
     margin: 0 1em;
-    color: block;
+    color: black;
 }
 
 .form-holder .form-cell input[type=text], .form-holder .form-cell input[type=password] {

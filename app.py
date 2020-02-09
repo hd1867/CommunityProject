@@ -86,6 +86,18 @@ def createpost():
     return render_template("create.html")
 
 
+@app.route("/comment", methods=["POST"])
+@require_login
+def comment():
+    if "comment" is None:
+        flash("Please fill out your comment")
+        return redirect(url_for('post'))
+    else:
+        temp = databaseUtils.comment_post(post, 'comment')
+        flash("Comment Created!")
+        return redirect(url_for('post'))
+
+
 @app.route('/login')
 def login():
     return render_template("login.html")
