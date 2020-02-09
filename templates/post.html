@@ -10,8 +10,8 @@
         <div class="container">
             <h1 class="text-center"> {{post[0]}} </h1>
             <h2 class="text-left"> {{post[1]}}</h2>
-            <h2 class="text-left"> Location: {{post[2]}}</h2>
-            <h2 class="text-left"> Skills Required: {{post[3]}}</h2>
+            <h2 class="text-left"> Location: {{post[4]}}</h2>
+            <h2 class="text-left"> Skills Required: {{post[2]}}</h2>
         </div>
 
         <div class="form-holder">
@@ -34,12 +34,11 @@
             <button onclick=""> RSVP </button>
         </div>
     </div>
-            <h3 class="text-center"> Comments </h3>
-         {% for comment in post[5] %}
+         {% for comments in post[5] %}
             <div class ="card">
                 <div class ="container">
-
-                <h4 class=text-left>{{comment}}</h4>
+                <h5 class="text-left">{{ comments['user'] }} said: </h5>
+                <h4 class=text-left>{{comments['comment']}}</h4>
 
             </div>
             </div>

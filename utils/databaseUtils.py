@@ -55,9 +55,8 @@ def create_post(title, description, username, loc, skills):
         "description": description,
         "user": username,
         "loc": loc,
-        # "image": image_to_str(image_name),
         "skills": skills,
-        "comment": []})
+        "comments": []})
     return post.inserted_id
 
 
@@ -66,13 +65,13 @@ def get_post_by_id(post_id):
     return posts.find_one({"_id": ObjectId(post_id)})
 
 
-def comment_post(post_id, comment):
+def comment_post(post_id, user, comment):
     post = (get_post_by_id(post_id))
-    if post['comment'] is None:
-        post['comment'] = [comment]
+    if post['comments'] is None:
+        post['comments'] = [{"user" : user, "comment" : comment}]
     else:
-        post['comment'] += [comment]
-    new_value = {"$set": {"comment": post['comment']}}
+        post['comments'] += [{"user" : user, "comment" : comment}]
+    new_value = {"$set": {"comments": post['comments']}}
     posts.update_one(get_post_by_id(post_id), new_value)
 
 

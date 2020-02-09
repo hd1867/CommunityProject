@@ -50,7 +50,7 @@ def posts():
 @app.route("/details")
 def details():
     post = (databaseUtils.get_post_by_id(request.args.get('postid')))
-    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['location'], (post)['comment']]
+    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['loc'], (post)['comments']]
 
     return render_template("post.html", post=postDetails)
 
@@ -77,18 +77,20 @@ def comment():
         return redirect(dest)
     else:
         print(request.form['Comment'])
-        temp = databaseUtils.comment_post(request.args.get("postid"), request.form['Comment'])
+        temp = databaseUtils.comment_post(request.args.get("postid"), session['username'], request.form['Comment'])
         return redirect(dest)
 
 @app.route("/post", methods=["POST"])
 @require_login
 def post():
+    print(request.form)
     if "title" not in request.form or "description" not in request.form:
         flash("Please fill out title and description")
         return redirect(url_for("createpost"))
     else:
-        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form['location'], request.form['skills'],
-                                         session['user'])
+        temp = databaseUtils.create_post(request.form['title'], request.form['description'], session['user'],
+                                         request.form['loc'], request.form['skills'])
+        print(temp)
         flash("Post Created!")
         return redirect(url_for('posts'))
 
@@ -121,6 +123,7 @@ def auth():
         user = databaseUtils.authenticate(request.form['user'], request.form['pwd'])
         if user:
             session['user'] = str(user)
+            session['username'] = databaseUtils.get_user_by_id(user)['username']
             session.permanent = True
             app.permanent_session_lifetime = timedelta(minutes=30)
             return redirect(url_for('root'))
@@ -131,6 +134,7 @@ def auth():
         success = databaseUtils.create_user(request.form['user'], request.form['pwd'])
         if (success):
             session['user'] = str(success)
+            session['username'] = databaseUtils.get_user_by_id(success)['username']
             session.permanent = True
             app.permanent_session_lifetime = timedelta(minutes=30)
             return redirect(url_for('root'))
