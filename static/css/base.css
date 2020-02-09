@@ -1,8 +1,8 @@
 
 hr {
     background-color: white;}
-body
-{background: url( "static/home-background.png") repeat 0 0;
+    body{background: url( "static/home-background.png") repeat 0 0;
+    color: black;
 }
 
 .wrapper {
@@ -33,6 +33,7 @@ body
     margin: 10vh;
     padding: 5vh;
     border-style: inset;
+    color: black;
 }
 
 button {
@@ -43,8 +44,20 @@ button {
     min-width: 200px;
     border-color: black;
     border-style: solid;
+    color: black;
 
+}
 
+.gallery{
+    margin 5vh;
+    border: 1vh solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+.gallery img{
+    width: 100%;
+    height: auto;
 }
 
 .btn-light {
@@ -55,6 +68,7 @@ button {
     display: flex;
     justify-content: center;
     width: auto;
+    color: black;
 }
 
 .form-holder .form-cell {
@@ -64,6 +78,7 @@ button {
     background-color: rgba(240, 255, 255, .8);
     padding: 3em;
     margin: 0 1em;
+    color: block;
 }
 
 .form-holder .form-cell input[type=text], .form-holder .form-cell input[type=password] {
