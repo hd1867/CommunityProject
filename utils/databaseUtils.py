@@ -104,6 +104,10 @@ def str_to_image(image_str):
     return image
 
 
+def add_report(report):
+    reports.insert_one({"description": report})
+
+
 # upgrades a normal user to an admin
 def user_admin(userid):
     return None

@@ -64,7 +64,8 @@ def report():
 @app.route("/report_button")
 def report_button():
     flash("Thank you for your support!")
-    return render_template('report.html')
+    databaseUtils.add_report(request.form['report'])
+    return redirect('/report')
 
 
 @app.route("/comment", methods=["POST"])
@@ -96,18 +97,6 @@ def post():
 @require_login
 def createpost():
     return render_template("create.html")
-
-
-@app.route("/comment", methods=["POST"])
-@require_login
-def comment():
-    if "comment" is None:
-        flash("Please fill out your comment")
-        return redirect(url_for('post'))
-    else:
-        temp = databaseUtils.comment_post(post, 'comment')
-        flash("Comment Created!")
-        return redirect(url_for('post'))
 
 
 @app.route('/login')
