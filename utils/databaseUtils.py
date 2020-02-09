@@ -105,6 +105,7 @@ def str_to_image(image_str):
 
 
 def add_report(report):
+    (print(report))
     reports.insert_one({"description": report})
 
 

@@ -9,18 +9,14 @@
     <h3 class="text-center"> State your problem, please: </h3>
     <div class ="card">
             <div class="form-holder">
-            <form action="{{ modify_query("/report", postid=post[3]) }}" method="POST">
+            <form action="/report_button" method="POST">
                 <div class="form-cell">
-                    <label for="report"></label>
                     <textarea type="text" name="report" id="report" rows="4" cols="50"></textarea><br>
                 </div>
+                 <input type="submit" class="btn" name="submit" value="report">
             </form>
             </div>
     </div>
-
-        <div class="row">
-            <button onclick="document.location.href='/report_button'"> Report </button>
-        </div>
     </div>
     </ul>
 
