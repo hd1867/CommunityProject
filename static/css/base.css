@@ -5,6 +5,12 @@ hr {
     color: black;
 }
 
+
+.container {
+    width: 600px;
+}
+
+
 .wrapper {
     margin: 5vh;
     background-color: rgba(36, 212, 42, 0.64);
@@ -12,6 +18,11 @@ hr {
     padding: 2vh;
     min-height: 80vh;
     border-radius: 5vh;
+}
+
+img {
+  border-radius: 8px;
+  width: 400px;
 }
 
 .nav {
