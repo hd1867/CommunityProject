@@ -83,3 +83,8 @@ button {
         text-align: center;
     }
 }
+
+.grip-container {
+    display: grid;
+    grid-gap: 50px 100px;
+}
