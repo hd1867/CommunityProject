@@ -50,7 +50,7 @@ def posts():
 @app.route("/details")
 def details():
     post = (databaseUtils.get_post_by_id(request.args.get('postid')))
-    postDetails = [(post)['title'], (post)['description'], (post)['skills']]
+    postDetails = [(post)['title'], (post)['description'], (post)['location'], (post)['skills']]
 
     return render_template("post.html", post=postDetails)
 
@@ -67,6 +67,7 @@ def report_button():
     return render_template('report.html')
 
 
+
 @app.route("/post", methods=["POST"])
 @require_login
 def post():
@@ -74,7 +75,7 @@ def post():
         flash("Please fill out title and description")
         return redirect(url_for("createpost"))
     else:
-        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form["location"], request.form['skills'],
+        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form['location'], request.form['skills'],
                                          session['user'])
         flash("Post Created!")
         return redirect(url_for('posts'))
