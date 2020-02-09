@@ -74,7 +74,7 @@ def report_button():
     return redirect('/report')
 
 
-@app.route("/rsvp_confirm", methods=["POST"])
+@app.route("/rsvp_confirm", methods=["GET", "POST"])
 @require_login
 def rsvp_confirm():
     print("check check check check check check check check check check")

@@ -108,10 +108,11 @@ def comment_post(post_id, user, comment):
 # add an rsvp on someone's post
 def rsvp_post(post_id, user):
     post = (get_post_by_id(post_id))
+    print(post)
     if post['rsvp'] is None:
-        post['rsvp'] = [{"user": user}]
+        post['rsvp'] = [user]
     else:
-        post['rsvp'] += [{"user": user}]
+        post['rsvp'] += [user]
     new_value = {"$set": {"rsvp": post['rsvp']}}
     posts.update_one(get_post_by_id(post_id), new_value)
 
