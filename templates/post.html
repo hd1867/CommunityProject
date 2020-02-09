@@ -7,37 +7,36 @@
 
     <ul id="post">
         <div class ="card">
-            <div class="row">
-                <div class="column">
+            <div class="column">
                <!-- <div class="container"> -->
-                    <h2 class="text-justify"> {{post[0]}} </h2><br>
-                    <h3 class="text-justify"> {{post[1]}}</h3><br>
-                    <h4 class="text-justify"> Location: {{post[4]}}</h4>
-                    <h4 class="text-justify"> Skills Required: {{post[2]}}</h4>
-                    <h4 class="text-justify"> RSVP: </h4>
-                    <div class ="card">
-                    {% for rsvps in post[4] %}
-                        <h5 class="text-left">{{ rsvps['user'] }} </h5>
-                    {% endfor %}
-                    </div>
+                <h2 class="text-justify"> {{post[0]}} </h2><br>
+                <h3 class="text-justify"> {{post[1]}}</h3><br>
+                <h4 class="text-justify"> Location: {{post[4]}}</h4>
+                <h4 class="text-justify"> Skills Required: {{post[2]}}</h4>
+                <h4 class="text-justify"> RSVP: </h4>
+                <div class ="card">
+                {% for rsvps in post[4] %}
+                    <h5 class="text-left">{{ rsvps['user'] }} </h5>
+                {% endfor %}
+                </div>
                 <!-- </div> -->
-                </div>
-                <div class="column">
-                    <h4 class="text-justify"> . </h4>
-                    <img src="{{post[6]}}" alt="placeholder">
-                </div>
             </div>
+            <div class="column">
+                <h4 class="text-justify"> . </h4>
+                <img src="{{post[6]}}" alt="placeholder">
+            </div>
+        </div>
 
         <div class="form-holder">
             <form action="{{ modify_query("/comment", postid=post[3]) }}" method="POST">
                 <div class="form-cell">
                     <label for="Comment"></label>
                     <textarea type="text" name="Comment" id="Comment" rows="4" cols="50"></textarea><br>
-                </div>
+                </div><br><br>
 
                 <input type="submit" class="btn" name="Comment" value="Comment">
             </form>
-        </div>
+        </div><br><br>
 
          <button type="button" name="rsvp" value="rsvp" onclick="document.location.href='{{ ("/rsvp_confirm?postid=" + post[3]|string) }}'"> RSVP </button>
 
