@@ -52,10 +52,12 @@ def create_post(title, description, username, skills, location):
     post = posts.insert_one({
         "title": title,
         "description": description,
-        "user": user,
+        "user": username,
+        "trash": None,
         "location": location,
         # "image": image_to_str(image_name),
-        "skills": skills})
+        "skills": skills,
+        "comment": []})
     return post.inserted_id
 
 
@@ -63,6 +65,11 @@ def create_post(title, description, username, skills, location):
 def get_post_by_id(post_id):
     print(posts.find_one({"_id": ObjectId(post_id)}))
     return posts.find_one({"_id": ObjectId(post_id)})
+
+
+def comment_post(post_id, comment):
+    new_value = {"$set": {"comment": comment}}
+    posts.update_one(get_post_by_id(post_id), new_value)
 
 
 # deletes a post by the post id
