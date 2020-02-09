@@ -1,8 +1,21 @@
+<!DOCTYPE html>
 {% extends "base.html" %}
 
 {% block active_link %}report-link{% endblock %}
 
 {% block body %}
 
+    <ul id="post">
+        <h3 class="text-center"> State your problem, please: </h3>
+    <div class ="card">
+
+        <label for="Comment"></label>
+        <textarea id="Comment" rows="4" cols="50"></textarea><br>
+
+        <div class="row">
+            <button onclick="document.location.href='/report_button'"> Report </button>
+        </div>
+    </div>
+    </ul>
 
 {% endblock %}

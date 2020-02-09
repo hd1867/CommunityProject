@@ -85,5 +85,5 @@ button {
 
 .grip-container {
     display: grid;
-    grid-gap: 50px 100px;
+    grid-gap: 100px;
 }
