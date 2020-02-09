@@ -48,7 +48,7 @@ def post():
         flash("Please fill out title and description")
         return redirect(url_for("createpost"))
     else:
-        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form['skills'],
+        temp = databaseUtils.create_post(request.form['title'], request.form['description'], request.form["location"], request.form['skills'],
                                          session['user'])
         flash("Post Created!")
         return redirect(url_for('posts'))
