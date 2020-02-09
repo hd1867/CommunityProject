@@ -61,6 +61,12 @@ def report():
     return render_template("report.html")
 
 
+@app.route("/report_button")
+def report_button():
+    flash("Thank you for your support!")
+    return render_template('report.html')
+
+
 @app.route("/post", methods=["POST"])
 @require_login
 def post():
