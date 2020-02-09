@@ -4,18 +4,30 @@
 {% block active_link %}posts-link{% endblock %}
 
 {% block body %}
-    <div class ="card">
     <ul id="post">
+    <div class ="card">
+
         <div class="container">
             <h1 class="text-center"> {{post[0]}} </h1>
+            <h2 class="text-center"> {{post[1]}}</h2>
+            <h2 class="text-center"> Skills Required: {{ post[2] }}</h2>
         </div>
-        </ul>
+
+        <label for="Comment"></label>
+        <textarea id="Comment" rows="4" cols="50">
+            Enter a comment
+        </textarea>
+
+        <div class="row">
+            <button onclick=""> RSVP </button>
+            <button onclick=""> Comment</button>
+        </div>
     </div>
     <div class ="card">
         <div class ="container">
 
         </div>
     </div>
-
+    </ul>
 
 {% endblock %}
