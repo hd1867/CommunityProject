@@ -1,14 +1,19 @@
 from _sha256 import sha256
 from bson import ObjectId
+from pymongo import MongoClient
 
 import pymongo as pymongo
 import base64
+import gridfs
 
 client = pymongo.MongoClient("mongodb+srv://admin:pass@thecommunityproject-lawyq.gcp.mongodb.net/test?retryWrites=true&w=majority")
 db = client.Users
 users = db.users
 posts = db.posts
 reports = db.reports
+
+db2 = MongoClient().gridfs_eaxmple
+fs = gridfs.GridFS(db2)
 
 
 # creates a user in the database with a username, password, and post id
@@ -48,13 +53,15 @@ def authenticate(username, password):
 
 
 # creates a post with a title, description, username, skills, and image name
-def create_post(title, description, username, loc, skills):
+def create_post(title, description, username, loc, skills, pic):
     user = get_user_by_name(username)
+    picture = fs.put(pic)
     post = posts.insert_one({
         "title": title,
         "description": description,
         "user": username,
         "loc": loc,
+        "picture": picture,
         "skills": skills,
         "comments": []})
     return post.inserted_id
@@ -103,6 +110,7 @@ def str_to_image(image_str):
     return image
 
 
+# adds a new report to the database
 def add_report(report):
     (print(report))
     reports.insert_one({"description": report})
@@ -111,3 +119,8 @@ def add_report(report):
 # upgrades a normal user to an admin
 def user_admin(userid):
     return None
+
+
+# returns a picture (image file)
+def get_picture(picture):
+    return fs.get(picture).read()
