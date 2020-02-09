@@ -6,11 +6,17 @@
 {% block body %}
 
     <ul id="post">
-        <h3 class="text-center"> State your problem, please: </h3>
+    <h3 class="text-center"> State your problem, please: </h3>
     <div class ="card">
-
-        <label for="Comment"></label>
-        <textarea id="Comment" rows="4" cols="50"></textarea><br>
+            <div class="form-holder">
+            <form action="{{ modify_query("/report", postid=post[3]) }}" method="POST">
+                <div class="form-cell">
+                    <label for="report"></label>
+                    <textarea type="text" name="report" id="report" rows="4" cols="50"></textarea><br>
+                </div>
+            </form>
+            </div>
+    </div>
 
         <div class="row">
             <button onclick="document.location.href='/report_button'"> Report </button>
