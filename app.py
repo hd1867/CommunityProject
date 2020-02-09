@@ -30,6 +30,12 @@ def root():
     return render_template("home.html")
 
 
+@app.route("/details")
+@require_login
+def details():
+    return render_template("post.html", details=databaseUtils.get_post_by_id())
+
+
 @app.route("/posts")
 def posts():
     return render_template("posts.html", posts=databaseUtils.all_post())
