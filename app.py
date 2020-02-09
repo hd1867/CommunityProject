@@ -61,10 +61,11 @@ def report():
     return render_template("report.html")
 
 
-@app.route("/report_button")
+@app.route("/report_button", methods=["POST"])
 def report_button():
     flash("Thank you for your support!")
-    return render_template('report.html')
+    temp = databaseUtils.add_report(request.form['report'])
+    return redirect('/report')
 
 
 @app.route("/comment", methods=["POST"])
