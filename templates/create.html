@@ -3,39 +3,43 @@
 {% block active_link %}login-link{% endblock %}
 
 {% block body %}
+
 <center class="form-holder">
-    <div class="form-cell">
-        <h3 class="text-center">Create Post</h3>
-        <form action="/post" method="POST">
-            <div class="form-group">
-                <label for="title">Title:</label><br>
-                <input required type="text" name="title" id="title">
-            </div>
-            <div class="form-group">
-                <label for="description">Description:</label><br>
-                <textarea  type="text" name="description" id="description" rows="4" cols="30"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="loc">Location:</label><br>
-                <textarea required type="text" name="loc" id="loc" rows="1" cols="30"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="skills">Skills:</label><br>
-                <input type="text" name="skills" id="skills">
-            </div>
-            <input type="submit" class="btn btn-light" name="submit" value="Create">
+
+        <div class="form-cell">
+            <form action="/post" method="POST">
+                <h3 class="text-center">Create Post</h3>
+
+                    <label for="upload"> Upload an image</label><br>
+                    <button id="upload" name="upload">Upload</button>
+                    <input class="btn" type='file' onchange="changePic(this)"/>
+                    <img id="show-img" src="#" alt="" />
+
+                    <div class="form-group">
+                        <label for="title">Title:</label><br>
+                        <input required type="text" name="title" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label><br>
+                        <textarea  type="text" name="description" id="description" rows="4" cols="30"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="loc">Location:</label><br>
+                        <textarea required type="text" name="loc" id="loc" rows="1" cols="30"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="skills">Skills:</label><br>
+                        <input type="text" name="skills" id="skills">
+                    </div>
+
+                    <input type="submit" class="btn btn-light" name="submit" value="Create">
         </form>
+
     </div>
-
-
-
-
-
-
-
-
-
-    .
 </center>
 
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/create.js' ) }}"></script>
 {% endblock %}

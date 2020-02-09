@@ -1,7 +1,7 @@
 from _sha256 import sha256
 from bson import ObjectId
 from pymongo import MongoClient
-
+from google.cloud import storage
 import pymongo as pymongo
 import base64
 import gridfs
@@ -12,6 +12,28 @@ users = db.users
 posts = db.posts
 reports = db.reports
 fs = gridfs.GridFS(db)
+
+
+def upload_blob(bucket_name, source_file_name, destination_blob_name):
+    """Uploads a file to the bucket."""
+    # bucket_name = "your-bucket-name"
+    # source_file_name = "local/path/to/file"
+    # destination_blob_name = "storage-object-name"
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_name)
+
+    print(
+        "File {} uploaded to {}.".format(
+            source_file_name, destination_blob_name
+        )
+    )
+
+    return "https://storage.cloud.google.com/communityproject-images/" + destination_blob_name
+
 
 
 # creates a user in the database with a username, password, and post id
@@ -53,12 +75,13 @@ def authenticate(username, password):
 # creates a post with all of its needed/wanted properties
 def create_post(title, description, username, loc, skills):
     user = get_user_by_name(username)
-    # picture = fs.put(pic)
+    picture = pic
     post = posts.insert_one({
         "title": title,
         "description": description,
         "user": username,
         "loc": loc,
+        "picture": picture,
         "skills": skills,
         # "picture": picture,
         "rsvp": [],
