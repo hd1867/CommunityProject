@@ -1,6 +1,8 @@
+import base64
 import os
 from datetime import timedelta
 from functools import wraps
+from random import randint
 
 from flask import Flask, render_template, request, redirect, flash, url_for, session
 from flask_bootstrap import Bootstrap
@@ -8,6 +10,8 @@ from werkzeug.urls import url_encode
 
 from utils import databaseUtils
 
+
+UPLOAD_FOLDER = "static/"
 
 
 
@@ -80,7 +84,8 @@ def comment():
         temp = databaseUtils.comment_post(request.args.get("postid"), session['username'], request.form['Comment'])
         return redirect(dest)
 
-@app.route("/post", methods=["POST"])
+
+@app.route("/post", methods=["GET", "POST"])
 @require_login
 def post():
     print(request.form)
@@ -89,13 +94,13 @@ def post():
         return redirect(url_for("createpost"))
     else:
         temp = databaseUtils.create_post(request.form['title'], request.form['description'], session['user'],
-                                         request.form['loc'], request.form['skills'])
+                                         request.form['loc'], request.form['skills'], session['img_url'])
         print(temp)
         flash("Post Created!")
         return redirect(url_for('posts'))
 
 
-@app.route("/createpost")
+@app.route("/createpost", methods=["GET"])
 @require_login
 def createpost():
     return render_template("create.html")
@@ -112,6 +117,22 @@ def logout():
         session.pop('user')
     return redirect(url_for('login'))
 
+
+@app.route("/imgUP", methods=["POST"])
+def imgUP():
+    print("Uploading")
+    data = request.form["url"]
+    encoded_data = data.split(',')[1]
+    decoded_data = base64.b64decode(encoded_data)
+    filename = "img/" + str(randint(0, 999999999999)) + ".png"
+    print(filename)
+    filepath = UPLOAD_FOLDER + filename
+    f = open(filepath, "wb")
+    f.write(decoded_data)
+    f.close()
+    url = databaseUtils.upload_blob("communityproject-images", filepath, str(randint(0, 999999999999)))
+    session['img_url'] = url
+    return redirect(url_for("createpost", img_url=url))
 
 @app.route("/auth", methods=["POST"])
 def auth():
