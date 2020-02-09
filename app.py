@@ -36,6 +36,7 @@ def modify_query(origin, **new_values):
 
     return '{}?{}'.format(origin, url_encode(args))
 
+
 @app.route('/')
 def root():
     return render_template("home.html")
@@ -52,7 +53,6 @@ def details():
     postDetails = [(post)['title'], (post)['description'], (post)['skills']]
 
     return render_template("post.html", post=postDetails)
-
 
 
 @app.route("/report")
