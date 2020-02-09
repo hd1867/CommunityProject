@@ -65,6 +65,10 @@ button {
 
 }
 
+.container.center{
+    position: center;
+}
+
 .gallery{
     float: left;
     width: 180px;

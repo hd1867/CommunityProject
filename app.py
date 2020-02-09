@@ -56,7 +56,7 @@ def posts():
 def details():
     post = (databaseUtils.get_post_by_id(request.args.get('postid')))
     postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['loc'],
-                   (post)['comments'], (post)['picture']]
+                   (post)['comments'], (post)['picture'], (post)['rsvp']]
 
     return render_template("post.html", post=postDetails)
 
@@ -105,7 +105,7 @@ def post():
         return redirect(url_for("createpost"))
     else:
         temp = databaseUtils.create_post(request.form['title'], request.form['description'], session['user'],
-                                         request.form['loc'], request.form['skills'], session["img_url"])
+                                         request.form['loc'], request.form['skills'], session["img_url"], )
 
         print(temp)
         flash("Post Created!")

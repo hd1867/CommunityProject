@@ -16,8 +16,8 @@
                 <h4 class="text-justify"> Location: {{post[4]}}</h4>
                 <h4 class="text-justify"> Skills Required: {{post[2]}}</h4>
                 <h4 class="text-justify"> RSVP: </h4>
-                {% for rsvps in post[4] %}
-                    <h5 class="text-left">{{ rsvps['user'] }} </h5>
+                {% for rsvps in post[7] %}
+                    <h5 class="text-left">{{ rsvps }} </h5>
                 {% endfor %}
             </div>
                 <img src="{{post[6]}}" alt="placeholder">
