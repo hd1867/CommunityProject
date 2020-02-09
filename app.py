@@ -105,7 +105,8 @@ def post():
         return redirect(url_for("createpost"))
     else:
         temp = databaseUtils.create_post(request.form['title'], request.form['description'], session['user'],
-                                         request.form['loc'], request.form['skills'], session['img_url'])
+                                         request.form['loc'], request.form['skills'], session["img_url"])
+
         print(temp)
         flash("Post Created!")
         return redirect(url_for('posts'))
