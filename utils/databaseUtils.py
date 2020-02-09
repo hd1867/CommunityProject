@@ -11,9 +11,7 @@ db = client.Users
 users = db.users
 posts = db.posts
 reports = db.reports
-
-db2 = MongoClient().gridfs_eaxmple
-fs = gridfs.GridFS(db2)
+fs = gridfs.GridFS(db)
 
 
 # creates a user in the database with a username, password, and post id
