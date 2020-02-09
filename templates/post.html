@@ -24,7 +24,7 @@
 
 
             <!-- find a way to make a specific block for comments when they are put in -->
-            <input type="submit" class="button" name="Comment" value="Comment">
+            <input type="submit" class="btn" name="Comment" value="Comment">
                 </div>
             </div>
             </form>
@@ -34,11 +34,16 @@
             <button onclick=""> RSVP </button>
         </div>
     </div>
-    <div class ="card">
-        <div class ="container">
+            <h3 class="text-center"> Comments </h3>
+         {% for comment in post[5] %}
+            <div class ="card">
+                <div class ="container">
 
+                <h4 class=text-left>{{comment}}</h4>
+
+            </div>
         </div>
-    </div>
+    {% endfor %}
     </ul>
 
 {% endblock %}

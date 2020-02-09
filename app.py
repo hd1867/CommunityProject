@@ -50,7 +50,7 @@ def posts():
 @app.route("/details")
 def details():
     post = (databaseUtils.get_post_by_id(request.args.get('postid')))
-    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['location']]
+    postDetails = [(post)['title'], (post)['description'], (post)['skills'], (post)["_id"], (post)['location'], (post)['comment']]
 
     return render_template("post.html", post=postDetails)
 

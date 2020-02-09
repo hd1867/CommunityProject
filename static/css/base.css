@@ -60,6 +60,17 @@ button {
     height: auto;
 }
 
+.btn {
+    font-family: sans-serif;
+    border-radius: 5vh;
+    background-color: rgba(240, 255, 255, .8);
+    min-height: 50px;
+    min-width: 200px;
+    border-color: black;
+    border-style: solid;
+    color: black;
+}
+
 .btn-light {
     border: solid 1px #d7d7d7;
 }
