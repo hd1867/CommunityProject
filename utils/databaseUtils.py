@@ -73,7 +73,6 @@ def delete_post(post_id):
 def all_post():
     all_pst = []
     for items in posts.find({}):
-
         all_pst.append(items)
         print(all_pst)
     return all_pst
