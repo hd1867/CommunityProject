@@ -63,12 +63,16 @@ def create_post(title, description, username, loc, skills):
 
 # gets a post by the post id
 def get_post_by_id(post_id):
-    print(posts.find_one({"_id": ObjectId(post_id)}))
     return posts.find_one({"_id": ObjectId(post_id)})
 
 
 def comment_post(post_id, comment):
-    new_value = {"$set": {"comment": comment}}
+    post = (get_post_by_id(post_id))
+    if post['comment'] is None:
+        post['comment'] = [comment]
+    else:
+        post['comment'] += [comment]
+    new_value = {"$set": {"comment": post['comment']}}
     posts.update_one(get_post_by_id(post_id), new_value)
 
 
@@ -83,7 +87,6 @@ def all_post():
     all_pst = []
     for items in posts.find({}):
         all_pst.append(items)
-        print(all_pst)
     return all_pst
 
 
