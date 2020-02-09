@@ -123,3 +123,7 @@ button {
     display: grid;
     grid-gap: 100px;
 }
+
+.textarea {
+    min-width: 80%;
+}
