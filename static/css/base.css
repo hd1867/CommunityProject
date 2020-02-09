@@ -32,7 +32,7 @@ body
     background-color: rgba(240, 255, 255, .8);
     margin: 10vh;
     padding: 5vh;
-    border: 10vh inset rgba(0,0,0,.125);
+    border-style: inset;
 }
 
 button {
