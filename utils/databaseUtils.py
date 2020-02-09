@@ -8,6 +8,7 @@ client = pymongo.MongoClient("mongodb+srv://admin:pass@thecommunityproject-lawyq
 db = client.Users
 users = db.users
 posts = db.posts
+reports = db.reports
 
 
 # creates a user in the database with a username, password, and post id
@@ -47,13 +48,12 @@ def authenticate(username, password):
 
 
 # creates a post with a title, description, username, skills, and image name
-def create_post(title, description, username, skills, location):
+def create_post(title, description, username, location, skills):
     user = get_user_by_name(username)
     post = posts.insert_one({
         "title": title,
         "description": description,
         "user": username,
-        "trash": None,
         "location": location,
         # "image": image_to_str(image_name),
         "skills": skills,
